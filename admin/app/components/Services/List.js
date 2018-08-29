@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Api } from "../Api.js";
+import { Api } from "../../common/Api.js";
 import axios from 'axios'
 
 export default class ServicesList extends Component {
@@ -8,9 +8,9 @@ export default class ServicesList extends Component {
         this.state = { list: [] };
     }
     componentDidMount() {
-        console.log(Api.servicesList);
+        console.log(Api.services);
 
-        axios.get(Api.servicesList)
+        axios.get(Api.services)
             .then(response => {
                 this.setState({ list: response.data });
             });

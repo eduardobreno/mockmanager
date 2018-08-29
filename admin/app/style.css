@@ -1,3 +1,8 @@
 .row {
     margin-top: 5px;
 }
+
+.btnRmDanger {
+    align-items: center;
+    display: flex;
+}

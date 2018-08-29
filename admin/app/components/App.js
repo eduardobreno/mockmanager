@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from './Header';
-import Router from './Router';
+import Router from '../common/Router';
 
 export default class App extends Component {
   render() {

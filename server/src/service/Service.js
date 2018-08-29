@@ -3,10 +3,10 @@ var Schema = new mongoose.Schema({
   name: String,
   url: String,
   request: [{
+    isOn: String,
+    method: String,
     header: String,
     body: String,
-  }],
-  response: [{
     statusResponse: String,
     headerResponse: String,
     bodyResponse: String

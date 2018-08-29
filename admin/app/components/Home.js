@@ -15,10 +15,10 @@ export default class Home extends Component {
             <div>
                 <ul>
                     <li>
-                        <NavLink to="admin/services" activeClassName="active" >Services List</NavLink>
+                        <NavLink to="/admin/services" activeClassName="active" >Services List</NavLink>
                     </li>
                     <li>
-                        <NavLink to="admin/services/add" activeClassName="active" >Services Add</NavLink>
+                        <NavLink to="/admin/services/add" activeClassName="active" >Services Add</NavLink>
                     </li>
                 </ul>
             </div >
