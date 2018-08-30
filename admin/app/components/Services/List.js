@@ -38,15 +38,14 @@ export default class ServicesList extends Component {
         });
     }
 
-    listItem = (item) => {
+    listItem = () => {
         let div = [];
 
         this.state.list.forEach((item, index) => {
             div.push(
                 <tr key={index}>
-                    <td>{item.name}</td>
-                    <td className="text-truncate">{item.url}</td>
-                    <td>
+                    <td className="text-truncate text-left">{item.url}</td>
+                    <td className="text-center">
                         <button type="button" className="btn btn-secondary" onClick={this.edit(item._id, item)}>Editar</button>
                         <button type="button" className="btn btn-danger" onClick={this.delete(item._id)}>Excluir</button>
                     </td>
@@ -61,7 +60,7 @@ export default class ServicesList extends Component {
             <div>
                 <div className="row justify-content-center">
                     <div className="col-md-10 col-xs-12">
-                        {this.state.retornoServer ? <div className="alert alert-info" role="alert">
+                        {this.state.retornoServer ? <div className="alert alert-dark" role="alert">
                             {this.state.retornoServer}
                         </div> : ''}
                         <h2>Services List</h2>
@@ -75,8 +74,7 @@ export default class ServicesList extends Component {
                                 <table className="table table-hover table-dark table-striped">
                                     <thead>
                                         <tr>
-                                            <th className="text-center">Name</th>
-                                            <th width="65%" className="text-center">URL</th>
+                                            <th width="80%" className="text-center">URL</th>
                                             <th width="20%" className="text-center">Ações</th>
                                         </tr>
                                     </thead>

@@ -7,6 +7,7 @@ var Schema = new mongoose.Schema({
     method: String,
     header: String,
     body: String,
+    scriptBefore: String,
     statusResponse: String,
     headerResponse: String,
     bodyResponse: String

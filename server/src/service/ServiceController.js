@@ -15,39 +15,44 @@ router.post('/', function (req, res) {
     Service.create(service,
         function (err, user) {
             if (err) {
+                console.log(err);
                 jsonResult.msg = "Error Ocurred."
                 return res.status(500).json(jsonResult);
             }
             jsonResult.success = true;
             jsonResult.msg = "Salvo com sucesso!"
-            res.status(200).json(jsonResult);
+            return res.status(200).json(jsonResult);
         });
 });
 
 router.put('/', function (req, res) {
     let service = req.body;
-    console.log(service)
-    Service.update(service,
+    let id = service._id;
+    delete service._id;
+    // console.log(service)
+    Service.findByIdAndUpdate(id, service, {new: true},
         function (err, user) {
             if (err) {
+                console.log(err);
                 jsonResult.msg = "Error Ocurred."
                 return res.status(500).json(jsonResult);
             }
             jsonResult.success = true;
             jsonResult.msg = "Salvo com sucesso!"
-            res.status(200).json(jsonResult);
+            return res.status(200).json(jsonResult);
         });
 });
 
 router.get('/', function (req, res) {
     Service.find({}, function (err, result) {
         if (err) {
+            console.log(err);
             jsonResult.msg = "Error Ocurred."
             return res.status(500).json(jsonResult);
         }
         jsonResult.success = true;
         jsonResult.data = result;
-        res.status(200).json(jsonResult)
+        return res.status(200).json(jsonResult)
     });
 });
 

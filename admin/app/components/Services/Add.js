@@ -76,7 +76,7 @@ export default class ServicesAdd extends Component {
             <div>
                 <div className="row justify-content-center">
                     <div className="col-md-8 col-xs-12">
-                        {this.state.retornoServer ? <div className="alert alert-info" role="alert">
+                        {this.state.retornoServer ? <div className="alert alert-dark" role="alert">
                             {this.state.retornoServer}
                         </div> : ''}
                         <h2>Services Add</h2>
@@ -85,7 +85,6 @@ export default class ServicesAdd extends Component {
                                 <div className="col-12">
                                     <div className="card row">
                                         <div className="card-body">
-                                            <Input required="true" className="form-control nIn" type="text" name="name" displayName="Name" placeholder="Nome do serviço" onChange={this.handleChange} />
                                             <Input required="true" className="form-control nIn" type="text" name="url" displayName="URL" placeholder="URL serviço" onChange={this.handleChange} />
                                         </div>
                                     </div>
@@ -94,7 +93,7 @@ export default class ServicesAdd extends Component {
                             <div className="row">
                                 <div className="col-12 noPadding">
                                     {this.state.request.map((shareholder, idx) => (
-                                        <div key={idx} className="card">
+                                        <div key={idx} className="card" >
                                             <div className="card-body">
                                                 <div className="row">
                                                     <div className="col-md-3 col-xs-1">
@@ -112,18 +111,7 @@ export default class ServicesAdd extends Component {
                                                             : ''}
 
                                                     </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-6">
-                                                        <DropBox
-                                                            name="method"
-                                                            displayName="Method"
-                                                            options={this.requestType}
-                                                            onChange={this.handleRequestChange(idx)}
-                                                            value={shareholder.method}
-                                                        />
-                                                    </div>
-                                                    <div className="col-6">
+                                                    <div className="col-3">
                                                         <Input
                                                             required="true"
                                                             type="number"
@@ -137,25 +125,46 @@ export default class ServicesAdd extends Component {
                                                     </div>
                                                 </div>
                                                 <div className="row">
-                                                    <div className="col-6">
-                                                        <TextArea
-                                                            required="true"
-                                                            name="headerResponse"
-                                                            displayName="Header"
-                                                            placeholder="Header"
-                                                            onChange={this.handleRequestChange(idx)}
-                                                            value={shareholder.headerResponse}
-                                                        />
-                                                    </div>
-                                                    <div className="col-6">
+                                                    <div className="col-12">
                                                         <TextArea
                                                             required="true"
                                                             name="bodyResponse"
                                                             displayName="Body"
                                                             placeholder="Body"
                                                             onChange={this.handleRequestChange(idx)}
+                                                            rows="10"
                                                             value={shareholder.bodyResponse}
                                                         />
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-12">
+                                                        <TextArea
+                                                            name="scriptBefore"
+                                                            displayName="Script Before"
+                                                            placeholder="JS code"
+                                                            onChange={this.handleRequestChange(idx)}
+                                                            rows="10"
+                                                            value={shareholder.scriptBefore}
+                                                        />
+                                                        <div className="card">
+                                                            <div className="card-body">
+                                                                <ul>
+                                                                    <li>
+                                                                        args[0] = variavel que guarda o *** na URL
+                                                                    </li>
+                                                                    <li>
+                                                                        urlParams = variavel que as queryString da url
+                                                                    </li>
+                                                                    <li>
+                                                                        req = variavel da requisição recebida
+                                                                    </li>
+                                                                    <li>
+                                                                        response = variavel da resposta do serviço
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
