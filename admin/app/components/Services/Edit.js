@@ -3,7 +3,7 @@ import { Api } from "../../common/Api.js";
 import axios from 'axios'
 import { Input, TextArea, DropBox } from '../../common/FormFields.js';
 
-export default class ServicesAdd extends Component {
+export default class ServicesEdit extends Component {
     constructor() {
         super();
         this.requestType = ["POST", "GET", "PUT", "DELETE"];
@@ -16,22 +16,28 @@ export default class ServicesAdd extends Component {
         };
         this.state = {
             retornoServer: null,
+            name: '',
+            url: '',
             request: [
                 this.inputsRequest
             ]
         }
     }
-    componentDidMount() { }
+    componentDidMount() {
+        this.setState(this.props.location.state.detail)
+    }
 
+    handleChange = (evt) => {
+        this.setState({ [evt.target.name]: evt.target.value });
+    }
     handleSubmit = (evt) => {
         evt.preventDefault();
         let serviceObj = {};
         [].forEach.call(this.form.querySelectorAll(".nIn"), (item => {
             serviceObj[item.name] = item.value;
         }));
-        this.form.checkValidity()
         this.setState(serviceObj, () => {
-            axios.post(Api.services, this.state).then(res => {
+            axios.put(Api.services, this.state).then(res => {
                 this.setState({ retornoServer: res.data.msg });
                 window.scrollTo(0, 0);
                 if (res.data.success) {
@@ -79,14 +85,32 @@ export default class ServicesAdd extends Component {
                         {this.state.retornoServer ? <div className="alert alert-info" role="alert">
                             {this.state.retornoServer}
                         </div> : ''}
-                        <h2>Services Add</h2>
+                        <h2>Services Edit</h2>
                         <form ref={form => this.form = form} onSubmit={this.handleSubmit}>
                             <div className="row">
                                 <div className="col-12">
                                     <div className="card row">
                                         <div className="card-body">
-                                            <Input required="true" className="form-control nIn" type="text" name="name" displayName="Name" placeholder="Nome do serviço" onChange={this.handleChange} />
-                                            <Input required="true" className="form-control nIn" type="text" name="url" displayName="URL" placeholder="URL serviço" onChange={this.handleChange} />
+                                            <Input
+                                                required="true"
+                                                className="form-control nIn"
+                                                type="text"
+                                                name="name"
+                                                displayName="Name"
+                                                placeholder="Nome do serviço"
+                                                onChange={this.handleChange}
+                                                value={this.state.name}
+                                            />
+                                            <Input
+                                                required="true"
+                                                className="form-control nIn"
+                                                type="text"
+                                                name="url"
+                                                displayName="URL"
+                                                placeholder="URL serviço"
+                                                onChange={this.handleChange}
+                                                value={this.state.url}
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -177,7 +201,7 @@ export default class ServicesAdd extends Component {
                         </form>
                     </div>
                 </div>
-            </div >
+            </div>
         )
     }
 }

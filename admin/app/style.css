@@ -1,7 +1,20 @@
 .row {
     margin-top: 5px;
 }
-
+.jumbotron{
+    margin: 0;
+}
+.table{
+    table-layout: fixed;
+}
+.overflowRe{
+    max-height: 500px;
+    max-width: 107%;
+    overflow: auto;
+}
+.noPadding{
+    padding: 0;
+}
 .btnRmDanger {
     align-items: center;
     display: flex;

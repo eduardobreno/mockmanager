@@ -11,6 +11,7 @@ export class Input extends Component {
                 <input
                     id={this.props.name}
                     name={this.props.name}
+                    required={this.props.required}
                     type={this.props.type}
                     onChange={this.props.onChange}
                     className={this.props.className}
@@ -35,6 +36,7 @@ export class TextArea extends Component {
                     className="form-control"
                     id={this.props.name}
                     name={this.props.name}
+                    required={this.props.required}
                     onChange={this.props.onChange}
                     placeholder={this.props.placeholder}
                     rows={this.props.rows} value={this.props.value}></textarea>

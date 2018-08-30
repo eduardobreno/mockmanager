@@ -27,7 +27,7 @@ router.get('/*', function (req, res) {
     });
     setTimeout(() => {
         if (!alreadySent) {
-            res.status(404).send("Rota não encontrada depois de 2s, acho q deve redirecionar pra outro lugar !! 404");
+            res.status(404).send("Rota não encontrada (" + endpoint + ") depois de 2s, acho q deve redirecionar pra outro lugar !! 404");
         }
     }, 2000);
 

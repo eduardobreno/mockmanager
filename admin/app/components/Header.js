@@ -8,7 +8,7 @@ export default class Header extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <nav className="navbar navbar-expand-md navbar-dark bg-dark">
         <NavLink className="navbar-brand" to="/admin" activeClassName="active" >Mock Manager</NavLink>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>

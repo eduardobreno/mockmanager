@@ -5,27 +5,67 @@ var bodyParser = require('body-parser');
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 var Service = require('./Service');
-
-// CREATES A NEW USER
+var jsonResult = {
+    success: false,
+    msg: ""
+};
 router.post('/', function (req, res) {
     let service = req.body;
-    console.log(service)
+
     Service.create(service,
         function (err, user) {
-            if (err) return res.status(500).send("There was a problem adding the information to the database.");
-            res.status(200).send("Salvo");
+            if (err) {
+                jsonResult.msg = "Error Ocurred."
+                return res.status(500).json(jsonResult);
+            }
+            jsonResult.success = true;
+            jsonResult.msg = "Salvo com sucesso!"
+            res.status(200).json(jsonResult);
         });
 });
 
-// RETURNS ALL THE USERS IN THE DATABASE
+router.put('/', function (req, res) {
+    let service = req.body;
+    console.log(service)
+    Service.update(service,
+        function (err, user) {
+            if (err) {
+                jsonResult.msg = "Error Ocurred."
+                return res.status(500).json(jsonResult);
+            }
+            jsonResult.success = true;
+            jsonResult.msg = "Salvo com sucesso!"
+            res.status(200).json(jsonResult);
+        });
+});
+
 router.get('/', function (req, res) {
     Service.find({}, function (err, result) {
-        if (err) return res.status(500).send("There was a problem finding the users.");
-        res.status(200).send(result);
+        if (err) {
+            jsonResult.msg = "Error Ocurred."
+            return res.status(500).json(jsonResult);
+        }
+        jsonResult.success = true;
+        jsonResult.data = result;
+        res.status(200).json(jsonResult)
     });
 });
 
-// // GETS A SINGLE USER FROM THE DATABASE
+router.delete('/:id', function (req, res) {
+    Service.findByIdAndRemove(req.params.id, function (err, user) {
+        if (err) {
+            jsonResult.msg = "Error Ocurred."
+            return res.status(500).json(jsonResult);
+        }
+        jsonResult.success = true;
+        Service.find({}, function (err, result) {
+            jsonResult.msg = "Removido!"
+            jsonResult.data = result;
+            res.status(200).json(jsonResult)
+        });
+    });
+});
+
 // router.get('/:id', function (req, res) {
 //     User.findById(req.params.id, function (err, user) {
 //         if (err) return res.status(500).send("There was a problem finding the user.");
@@ -34,13 +74,7 @@ router.get('/', function (req, res) {
 //     });
 // });
 
-// // DELETES A USER FROM THE DATABASE
-// router.delete('/:id', function (req, res) {
-//     User.findByIdAndRemove(req.params.id, function (err, user) {
-//         if (err) return res.status(500).send("There was a problem deleting the user.");
-//         res.status(200).send("User: "+ user.name +" was deleted.");
-//     });
-// });
+
 
 // // UPDATES A SINGLE USER IN THE DATABASE
 // router.put('/:id', function (req, res) {
