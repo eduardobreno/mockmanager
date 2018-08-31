@@ -81,7 +81,7 @@ export default class ServicesEdit extends Component {
         return (
             <div>
                 <div className="row justify-content-center">
-                    <div className="col-md-8 col-xs-12">
+                    <div className="col-md-12 col-xs-12">
                         {this.state.retornoServer ? <div className="alert alert-dark" role="alert">
                             {this.state.retornoServer}
                         </div> : ''}
@@ -120,7 +120,7 @@ export default class ServicesEdit extends Component {
                                                             value={shareholder.isOn}
                                                         />
                                                     </div>
-                                                    <div className="col-2 btnRmDanger">
+                                                    <div className="col-2 offset-1 btnRmDanger">
                                                         {idx > 0 ?
                                                             <button type="button" onClick={this.handleRemoveShareholder(idx)} className="btn btn-danger btn-sm "> - </button>
                                                             : ''}
@@ -140,7 +140,7 @@ export default class ServicesEdit extends Component {
                                                     </div>
                                                 </div>
                                                 <div className="row">
-                                                    <div className="col-12">
+                                                    <div className="col-6">
                                                         <TextArea
                                                             required="true"
                                                             name="bodyResponse"
@@ -151,12 +151,10 @@ export default class ServicesEdit extends Component {
                                                             value={shareholder.bodyResponse}
                                                         />
                                                     </div>
-                                                </div>
-                                                <div className="row">
-                                                    <div className="col-12">
+                                                    <div className="col-6">
                                                         <TextArea
                                                             name="scriptBefore"
-                                                            displayName="Script Before with variables"
+                                                            displayName="Script before send"
                                                             placeholder="JS code"
                                                             onChange={this.handleRequestChange(idx)}
                                                             rows="10"
@@ -166,7 +164,7 @@ export default class ServicesEdit extends Component {
                                                             <div className="card-body">
                                                                 <ul>
                                                                     <li>
-                                                                        args[0] = variavel que guarda o *** na URL
+                                                                        args[0] = variavel que guarda o *** na URL (somente um CPF)
                                                                     </li>
                                                                     <li>
                                                                         urlParams = variavel que as queryString da url

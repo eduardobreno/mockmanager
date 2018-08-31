@@ -25,7 +25,11 @@ module.exports = {
       {
         from: 'app/index.html',
         to: '../public/'
-      }
+      },
+      // {
+      //   from: path.join(__dirname,'app/js/'),
+      //   to: '../public/js'
+      // }
     ]),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),

@@ -15,17 +15,17 @@ module.exports = {
     filename: 'js/[name]-[hash].min.js'
   },
   plugins: [
-    // new CopyWebpackPlugin([
-    //   {
-    //     from: 'app/index.html',
-    //     to: '../public/'
-    //   }
-    // ]),
-    new HtmlWebpackPlugin({
-      template: 'app/index.html',
-      inject: 'body',
-      filename: 'index.html'
-    }),
+    new CopyWebpackPlugin([
+      {
+        from: 'app/index.html',
+        to: '../public/'
+      }
+    ]),
+    // new HtmlWebpackPlugin({
+    //   template: 'app/index.html',
+    //   inject: 'body',
+    //   filename: 'index.html'
+    // }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new ExtractTextPlugin('[name]-[hash].min.css'),
     new webpack.optimize.UglifyJsPlugin({
