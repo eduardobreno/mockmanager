@@ -13,16 +13,12 @@ router.use(bodyParser.json());
 var Service = require('../service/Service');
 
 router.all('/*', function (req, res) {
-    var alreadySent = false;
-    var endpoint = req.path;
-    var originalEndpoint = req.path;
+    var parsedUrl = url.parse(req.url);
+    var endpoint = parsedUrl.pathname;
+    var originalEndpoint = req.url;
 
     console.log(req.method + " " + req.url);
 
-    // var cpfRegex = /([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})/;
-    // var args = endpoint.match(cpfRegex);
-    // endpoint = endpoint.replace(cpfRegex, "***");
-    var parsedUrl = url.parse(req.url);
     var urlParams = querystring.parse(parsedUrl.query);
 
     doMagic(endpoint).then(newUrl => {
@@ -91,7 +87,8 @@ doMagic = (endpoint) => {
             if (!urlBanco) {
                 reject("NotFound");
             }
-            urlBanco = urlBanco.split("/");
+            var urlBancoParsed = url.parse(urlBanco);
+            urlBanco = urlBancoParsed.pathname.split("/");
             for (var i = 0; i < urlArr.length; i++) {
                 if (urlBanco[i] == "***") {
                     args.push(urlArr[i]);
