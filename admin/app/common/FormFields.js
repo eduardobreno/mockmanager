@@ -12,8 +12,10 @@ export class Input extends Component {
                     id={this.props.name}
                     name={this.props.name}
                     required={this.props.required}
+                    autoComplete="off"
                     type={this.props.type}
                     onChange={this.props.onChange}
+                    rows={this.props.rows}
                     className={this.props.className}
                     placeholder={this.props.placeholder}
                     value={this.props.value}

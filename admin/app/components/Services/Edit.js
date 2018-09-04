@@ -6,19 +6,16 @@ import { Input, TextArea, DropBox } from '../../common/FormFields.js';
 export default class ServicesEdit extends Component {
     constructor() {
         super();
-        this.requestType = ["POST", "GET", "PUT", "DELETE"];
         this.inputsRequest = {
             isOn: 'On',
-            method: 'POST',
             statusResponse: '',
             scriptBefore: '',
             bodyResponse: '',
-            headerResponse: ''
         };
         this.state = {
             retornoServer: null,
             url: '',
-            request: [
+            response: [
                 this.inputsRequest
             ]
         }
@@ -37,7 +34,8 @@ export default class ServicesEdit extends Component {
             serviceObj[item.name] = item.value;
         }));
         this.setState(serviceObj, () => {
-            axios.put(Api.services, this.state).then(res => {
+            let id = this.state._id;
+            axios.put(Api.services + id, this.state).then(res => {
                 this.setState({ retornoServer: res.data.msg });
                 window.scrollTo(0, 0);
                 if (res.data.success) {
@@ -50,7 +48,7 @@ export default class ServicesEdit extends Component {
     }
 
     handleRequestChange = (idx) => (evt) => {
-        const newReq = this.state.request.map((reqs, sidx) => {
+        const newReq = this.state.response.map((reqs, sidx) => {
             if (evt.target.name == "isOn" && evt.target.value == "On") {
                 reqs.isOn = "Off";
             }
@@ -60,20 +58,20 @@ export default class ServicesEdit extends Component {
             let re = Object.assign({}, reqs, obj);
             return re;
         });
-        this.setState({ request: newReq });
+        this.setState({ response: newReq });
     }
 
     handleAddReq = () => {
         let newIn = Object.assign({}, this.inputsRequest);
         newIn.isOn = "Off";
         this.setState({
-            request: this.state.request.concat([newIn])
+            response: this.state.response.concat([newIn])
         });
     }
 
     handleRemoveShareholder = (idx) => () => {
         this.setState({
-            request: this.state.request.filter((s, sidx) => idx !== sidx)
+            response: this.state.response.filter((s, sidx) => idx !== sidx)
         });
     }
 
@@ -107,14 +105,14 @@ export default class ServicesEdit extends Component {
                             </div>
                             <div className="row">
                                 <div className="col-12 noPadding">
-                                    {this.state.request.map((shareholder, idx) => (
+                                    {this.state.response.map((shareholder, idx) => (
                                         <div key={idx} className="card">
                                             <div className="card-body">
                                                 <div className="row">
                                                     <div className="col-md-3 col-xs-1">
                                                         <DropBox
                                                             name="isOn"
-                                                            displayName={"Requisição #" + (idx + 1)}
+                                                            displayName={"Response #" + (idx + 1)}
                                                             options={["On", "Off"]}
                                                             onChange={this.handleRequestChange(idx)}
                                                             value={shareholder.isOn}
@@ -142,7 +140,6 @@ export default class ServicesEdit extends Component {
                                                 <div className="row">
                                                     <div className="col-6">
                                                         <TextArea
-                                                            required="true"
                                                             name="bodyResponse"
                                                             displayName="Body"
                                                             placeholder="Body"
@@ -150,6 +147,15 @@ export default class ServicesEdit extends Component {
                                                             rows="10"
                                                             value={shareholder.bodyResponse}
                                                         />
+                                                        <div className="card">
+                                                            <div className="card-body">
+                                                                <ul>
+                                                                    <li>
+                                                                        JSON de resposta, pode ser vazio
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div className="col-6">
                                                         <TextArea
@@ -164,6 +170,9 @@ export default class ServicesEdit extends Component {
                                                             <div className="card-body">
                                                                 <ul>
                                                                     <li>
+                                                                        body = variavel que de recebimento do request
+                                                                    </li>
+                                                                    <li>
                                                                         args[0] = variavel que guarda o *** na URL (somente um CPF)
                                                                     </li>
                                                                     <li>
@@ -173,7 +182,10 @@ export default class ServicesEdit extends Component {
                                                                         req = variavel da requisição recebida
                                                                     </li>
                                                                     <li>
-                                                                        response = variavel da resposta do serviço
+                                                                        res = variavel do response
+                                                                    </li>
+                                                                    <li>
+                                                                        response = variavel de resposta body do serviço
                                                                     </li>
                                                                 </ul>
                                                             </div>

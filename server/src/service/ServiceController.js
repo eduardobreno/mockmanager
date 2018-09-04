@@ -25,12 +25,12 @@ router.post('/', function (req, res) {
         });
 });
 
-router.put('/', function (req, res) {
+router.put('/:id', function (req, res) {
     let service = req.body;
-    let id = service._id;
+    let id = req.params.id;
     delete service._id;
     // console.log(service)
-    Service.findByIdAndUpdate(id, service, {new: true},
+    Service.findByIdAndUpdate(id, service, { new: true },
         function (err, user) {
             if (err) {
                 console.log(err);
@@ -44,7 +44,20 @@ router.put('/', function (req, res) {
 });
 
 router.get('/', function (req, res) {
-    Service.find({}, function (err, result) {
+    Service.find({}).sort('url').exec(function (err, result) {
+        if (err) {
+            console.log(err);
+            jsonResult.msg = "Error Ocurred."
+            return res.status(500).json(jsonResult);
+        }
+        jsonResult.success = true;
+        jsonResult.data = result;
+        return res.status(200).json(jsonResult)
+    });
+});
+
+router.get('/:id', function (req, res) {
+    Service.findById(req.params.id, function (err, result) {
         if (err) {
             console.log(err);
             jsonResult.msg = "Error Ocurred."

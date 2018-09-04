@@ -2,14 +2,15 @@ var mongoose = require('mongoose');
 var Schema = new mongoose.Schema({
   name: String,
   url: String,
-  request: [{
-    isOn: String,
-    method: String,
+  request: {
     header: String,
-    body: String,
+    method: String,
+    body: String
+  },
+  response: [{
+    isOn: String,
     scriptBefore: String,
     statusResponse: String,
-    headerResponse: String,
     bodyResponse: String
   }]
 });

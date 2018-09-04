@@ -25,17 +25,27 @@ export default class ServicesList extends Component {
         })
     }
 
+    view = (id) => () => {
+        this.props.history.push({
+            pathname: 'services/view/' + id
+        })
+    }
+
     delete = (id) => () => {
-        axios.delete(Api.services + id, {}).then(res => {
-            this.setState({ retornoServer: res.data.msg });
-            window.scrollTo(0, 0);
-            if (res.data.success) {
-                this.setState({ list: res.data.data });
-                setTimeout(() => {
-                    this.setState({ retornoServer: null });
-                }, 1000);
+        if (confirm("TEM CERTEZA MESMO??????!!! \n\n\n ARE YOU SURE?!?!?!")) {
+            if (confirm("Laste chance! TEM MESMO CERTEZA?")) {
+                axios.delete(Api.services + id, {}).then(res => {
+                    this.setState({ retornoServer: res.data.msg });
+                    window.scrollTo(0, 0);
+                    if (res.data.success) {
+                        this.setState({ list: res.data.data });
+                        setTimeout(() => {
+                            this.setState({ retornoServer: null });
+                        }, 1000);
+                    }
+                });
             }
-        });
+        }
     }
 
     listItem = () => {
@@ -46,8 +56,9 @@ export default class ServicesList extends Component {
                 <tr key={index}>
                     <td className="text-truncate text-left">{item.url}</td>
                     <td className="text-center">
-                        <button type="button" className="btn btn-secondary" onClick={this.edit(item._id, item)}>Editar</button>
-                        <button type="button" className="btn btn-danger" onClick={this.delete(item._id)}>Excluir</button>
+                        <button type="button" className="btn btn-secondary" onClick={this.view(item._id)}>View</button>
+                        <button type="button" className="btn btn-secondary" onClick={this.edit(item._id, item)}>Edit</button>
+                        <button type="button" className="btn btn-danger" onClick={this.delete(item._id)}>Delete</button>
                     </td>
                 </tr>
             );
@@ -66,7 +77,7 @@ export default class ServicesList extends Component {
                         <h2>Services List</h2>
                         <div className="row">
                             <div className="col-sm text-right">
-                                <button type="button" onClick={this.add} className="btn btn-secondary">Adicionar</button>
+                                <button type="button" onClick={this.add} className="btn btn-secondary">Add</button>
                             </div>
                         </div>
                         <div className="row">
@@ -74,8 +85,8 @@ export default class ServicesList extends Component {
                                 <table className="table table-hover table-dark table-striped">
                                     <thead>
                                         <tr>
-                                            <th width="80%" className="text-center">URL</th>
-                                            <th width="20%" className="text-center">Ações</th>
+                                            <th width="70%" className="text-center">URL</th>
+                                            <th width="30%" className="text-center">Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
