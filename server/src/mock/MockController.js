@@ -26,6 +26,7 @@ router.all('/*', function (req, res) {
     console.log(req.method + " " + req.url);
 
     var urlParams = querystring.parse(parsedUrl.query);
+    var __PDF__ = __dirname + "/../../static/pdf.pdf";
 
     doMagic(endpoint).then(newUrl => {
         console.log("Searching for: ", newUrl);
@@ -74,11 +75,15 @@ router.all('/*', function (req, res) {
                         } else {
                             return res.status(statusResponse).send();
                         }
+                    } else {
+                        return;
                     }
                 }
             };
+
             console.log("NotFound: ", endpoint);
             Redirect(req, res);
+
 
         });
     }).catch(err => {

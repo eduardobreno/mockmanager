@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = new mongoose.Schema({
   name: String,
   url: String,
+  description: String,
   request: {
     header: String,
     method: String,

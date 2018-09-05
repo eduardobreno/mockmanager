@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Api } from "../../common/Api.js";
 import axios from 'axios'
 import { Input, TextArea, DropBox } from '../../common/FormFields.js';
+import { Hints } from '../../common/Hints.js';
 
 export default class ServicesEdit extends Component {
     constructor() {
@@ -15,6 +16,7 @@ export default class ServicesEdit extends Component {
         this.state = {
             retornoServer: null,
             url: '',
+            description: '',
             response: [
                 this.inputsRequest
             ]
@@ -101,6 +103,18 @@ export default class ServicesEdit extends Component {
                                             />
                                         </div>
                                     </div>
+                                    <div className="card row">
+                                        <div className="card-body">
+                                            <TextArea
+                                                required="true"
+                                                className="form-control nIn"
+                                                name="description"
+                                                displayName="Descrição"
+                                                placeholder="Descrição de onde é usado esse serviço"
+                                                onChange={this.handleChange}
+                                                value={this.state.description} />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div className="row">
@@ -147,15 +161,7 @@ export default class ServicesEdit extends Component {
                                                             rows="10"
                                                             value={shareholder.bodyResponse}
                                                         />
-                                                        <div className="card">
-                                                            <div className="card-body">
-                                                                <ul>
-                                                                    <li>
-                                                                        JSON de resposta, pode ser vazio
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
+                                                        <Hints />
                                                     </div>
                                                     <div className="col-6">
                                                         <TextArea
@@ -166,30 +172,7 @@ export default class ServicesEdit extends Component {
                                                             rows="10"
                                                             value={shareholder.scriptBefore}
                                                         />
-                                                        <div className="card">
-                                                            <div className="card-body">
-                                                                <ul>
-                                                                    <li>
-                                                                        body = variavel que de recebimento do request
-                                                                    </li>
-                                                                    <li>
-                                                                        args[0] = variavel que guarda o *** na URL (somente um CPF)
-                                                                    </li>
-                                                                    <li>
-                                                                        urlParams = variavel que as queryString da url
-                                                                    </li>
-                                                                    <li>
-                                                                        req = variavel da requisição recebida
-                                                                    </li>
-                                                                    <li>
-                                                                        res = variavel do response
-                                                                    </li>
-                                                                    <li>
-                                                                        response = variavel de resposta body do serviço
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
+                                                        <Hints variables />
                                                     </div>
                                                 </div>
                                             </div>

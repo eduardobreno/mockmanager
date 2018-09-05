@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Api } from "../../common/Api.js";
 import axios from 'axios'
 import { Input, TextArea, DropBox } from '../../common/FormFields.js';
+import { Hints } from '../../common/Hints.js';
 
 export default class ServicesAdd extends Component {
     constructor() {
@@ -38,6 +39,10 @@ export default class ServicesAdd extends Component {
                 }
             });
         });
+    }
+
+    handleChange = (evt) => {
+        this.setState({ [evt.target.name]: evt.target.value });
     }
 
     handleRequestChange = (idx) => (evt) => {
@@ -89,7 +94,18 @@ export default class ServicesAdd extends Component {
                                                 name="url"
                                                 displayName="URL"
                                                 placeholder="URL serviço"
-                                                onChange={this.handleRequestChange} />
+                                                onChange={this.handleChange} />
+                                        </div>
+                                    </div>
+                                    <div className="card row">
+                                        <div className="card-body">
+                                            <TextArea
+                                                required="true"
+                                                className="form-control nIn"
+                                                name="description"
+                                                displayName="Descrição"
+                                                placeholder="Descrição de onde é usado esse serviço"
+                                                onChange={this.handleChange} />
                                         </div>
                                     </div>
                                 </div>
@@ -130,15 +146,6 @@ export default class ServicesAdd extends Component {
                                                 </div>
                                                 <div className="row">
                                                     <div className="col-6">
-                                                        <div className="card">
-                                                            <div className="card-body">
-                                                                <ul>
-                                                                    <li>
-                                                                        JSON de resposta, pode ser vazio
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
                                                         <TextArea
                                                             name="bodyResponse"
                                                             displayName="Body"
@@ -147,36 +154,10 @@ export default class ServicesAdd extends Component {
                                                             rows="10"
                                                             value={shareholder.bodyResponse}
                                                         />
+                                                        <Hints />
                                                     </div>
 
                                                     <div className="col-6">
-                                                        <div className="card">
-                                                            <div className="card-body">
-                                                                <ul>
-                                                                    <li>
-                                                                        body = variavel que de recebimento do request
-                                                                    </li>
-                                                                    <li>
-                                                                        args[0] = variavel que guarda o *** na URL (somente um CPF)
-                                                                    </li>
-                                                                    <li>
-                                                                        urlParams = variavel que as queryString da url
-                                                                    </li>
-                                                                    <li>
-                                                                        req = variavel da requisição recebida
-                                                                    </li>
-                                                                    <li>
-                                                                        res = variavel do response
-                                                                    </li>
-                                                                    <li>
-                                                                        response = variavel de resposta body do serviço
-                                                                    </li>
-                                                                    <li>
-                                                                        ignoreResponse:bool = variavel caso queira ignorar a resposta padrão e enviar a própria utilizando (res.status(statusResponse).send(response))
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
                                                         <TextArea
                                                             name="scriptBefore"
                                                             displayName="Script before send"
@@ -185,6 +166,7 @@ export default class ServicesAdd extends Component {
                                                             rows="10"
                                                             value={shareholder.scriptBefore}
                                                         />
+                                                        <Hints variables />
                                                     </div>
                                                 </div>
                                             </div>
