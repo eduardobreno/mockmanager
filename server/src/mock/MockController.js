@@ -45,16 +45,16 @@ router.all('/*', function (req, res) {
                 let item2 = item.response[j];
                 if (item2.isOn == "On") {
                     console.log("Found: ", item.url, item2.statusResponse)
+                    var body = {};
                     res.set('Content-Type', 'application/json');
+                    statusResponse = item2.statusResponse;
                     if (item2.bodyResponse)
                         response = JSON.parse(item2.bodyResponse);
 
-                    statusResponse = item2.statusResponse;
-                    var body = {};
                     if (req.rawBody) {
                         body = JSON.parse(req.rawBody);
                     }
-                    found = true;
+
                     if (item2.scriptBefore) {
                         console.log("__________BEGIN SCRIPT__________\n\n");
                         try {

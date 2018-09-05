@@ -1,2 +1,2 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/api1');
+mongoose.connect('mongodb://localhost:27017/mockManager');

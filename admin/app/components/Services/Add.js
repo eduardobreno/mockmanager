@@ -130,14 +130,6 @@ export default class ServicesAdd extends Component {
                                                 </div>
                                                 <div className="row">
                                                     <div className="col-6">
-                                                        <TextArea
-                                                            name="bodyResponse"
-                                                            displayName="Body"
-                                                            placeholder="Body"
-                                                            onChange={this.handleRequestChange(idx)}
-                                                            rows="10"
-                                                            value={shareholder.bodyResponse}
-                                                        />
                                                         <div className="card">
                                                             <div className="card-body">
                                                                 <ul>
@@ -147,17 +139,17 @@ export default class ServicesAdd extends Component {
                                                                 </ul>
                                                             </div>
                                                         </div>
+                                                        <TextArea
+                                                            name="bodyResponse"
+                                                            displayName="Body"
+                                                            placeholder="Body"
+                                                            onChange={this.handleRequestChange(idx)}
+                                                            rows="10"
+                                                            value={shareholder.bodyResponse}
+                                                        />
                                                     </div>
 
                                                     <div className="col-6">
-                                                        <TextArea
-                                                            name="scriptBefore"
-                                                            displayName="Script before send"
-                                                            placeholder="JS code"
-                                                            onChange={this.handleRequestChange(idx)}
-                                                            rows="10"
-                                                            value={shareholder.scriptBefore}
-                                                        />
                                                         <div className="card">
                                                             <div className="card-body">
                                                                 <ul>
@@ -179,9 +171,20 @@ export default class ServicesAdd extends Component {
                                                                     <li>
                                                                         response = variavel de resposta body do serviço
                                                                     </li>
+                                                                    <li>
+                                                                        ignoreResponse:bool = variavel caso queira ignorar a resposta padrão e enviar a própria utilizando (res.status(statusResponse).send(response))
+                                                                    </li>
                                                                 </ul>
                                                             </div>
                                                         </div>
+                                                        <TextArea
+                                                            name="scriptBefore"
+                                                            displayName="Script before send"
+                                                            placeholder="JS code"
+                                                            onChange={this.handleRequestChange(idx)}
+                                                            rows="10"
+                                                            value={shareholder.scriptBefore}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>

@@ -6,16 +6,19 @@ import { TextArea } from '../../common/FormFields.js';
 export default class ServicesView extends Component {
     constructor() {
         super();
-        this.state = { request: { header: '' } };
+        this.state = { request: { header: '', body: '' } };
     }
     componentDidMount() {
         let id = this.props.match.params.id;
         axios.get(Api.services + id, {})
             .then(response => {
+                if (response.data.data.request.body == null) {
+                    response.data.data.request.body = undefined;
+                }
+
                 this.setState(response.data.data);
             });
     }
-
 
     render() {
         return (
